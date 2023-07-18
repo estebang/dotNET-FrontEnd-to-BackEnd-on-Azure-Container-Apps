@@ -28,7 +28,9 @@ jobs:
           creds: ${{ secrets.AzureSPN }}
 
       - name: Azure Dev Provision
-        run: azd provision --no-prompt
+        run: |
+          azd login
+          azd provision --no-prompt
         env:
           AZURE_ENV_NAME: ${{ env.RESOURCE_GROUP_NAME }}
           AZURE_LOCATION: ${{ env.REGION }} 
