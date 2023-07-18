@@ -8,7 +8,7 @@ on:
 env:
   
   # alphanumeric string under 14 characters
-  RESOURCE_GROUP_NAME: store
+  RESOURCE_GROUP_NAME: VSLive-ACA
 
   # specify your preferred region
   REGION: westus
@@ -28,7 +28,9 @@ jobs:
           creds: ${{ secrets.AzureSPN }}
 
       - name: Azure Dev Provision
-        run: azd provision --no-prompt
+        run: |
+          azd auth login
+          azd provision --no-prompt
         env:
           AZURE_ENV_NAME: ${{ env.RESOURCE_GROUP_NAME }}
           AZURE_LOCATION: ${{ env.REGION }} 
